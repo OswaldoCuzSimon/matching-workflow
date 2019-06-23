@@ -1,0 +1,7 @@
+unmatching_file:
+  path: 'Catálogo Abarrotes Carnes y Lácteos 2019-1.xlsx'
+  id_col: index
+  gtin_col: 'COD BARRAS'
+  product_namme_col: 'PRODUCTO'
+  kargs:
+    skiprows: 6
