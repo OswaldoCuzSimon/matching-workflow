@@ -11,8 +11,7 @@
 
 import luigi
 import csv
-from stage import read_unmatched_products
-from stage import dump_database
+import stage
 
 
 class CleanUnmatchedProductsFile(luigi.Task):
@@ -24,8 +23,8 @@ class CleanUnmatchedProductsFile(luigi.Task):
         return luigi.LocalTarget('unmatched_products_clean_file.csv')
 
     def run(self):
-        stage = read_unmatched_products.ReadUnmatchedProducts()
-        df = stage.execute()
+        stage_ = stage.ReadUnmatchedProducts()
+        df = stage_.execute()
         df.to_csv(self.output().path, index=False, quoting=csv.QUOTE_ALL)
 
 
@@ -38,9 +37,10 @@ class DumpDatabase(luigi.Task):
         return luigi.LocalTarget('product.csv')
 
     def run(self):
-        stage = dump_database.DumpDatabase()
-        df = stage.execute()
+        stage_ = stage.DumpDatabase()
+        df = stage_.execute()
         df.to_csv(self.output().path, index=False, quoting=csv.QUOTE_ALL)
+
 
 if __name__ == '__main__':
     luigi.run()

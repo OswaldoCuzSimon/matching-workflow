@@ -9,3 +9,5 @@
 # Date last modified: 6/22/19
 # Project Name: matching-framework
 
+from .postgresql import Product
+from .read_file import XLSX

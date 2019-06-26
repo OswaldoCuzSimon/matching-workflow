@@ -10,7 +10,7 @@
 # Project Name: matching-framework
 
 import utils
-from extract.postgresql import Product
+from extract import Product
 
 
 class DumpDatabase(object):

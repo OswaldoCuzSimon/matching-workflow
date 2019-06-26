@@ -11,7 +11,9 @@
 
 import pandas as pd
 
+
 class XLSX(object):
+    
     def __init__(self, path, id_col, gtin_col, product_namme_col):
         self.name = path
         self.id_col = id_col

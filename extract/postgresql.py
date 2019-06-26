@@ -10,11 +10,8 @@
 # Project Name: geolocated-price-comparison
 
 from config import config
-import pandas as pd
-from pathlib import Path
 import psycopg2
 import pandas.io.sql as sqlio
-
 
 
 class Product(object):

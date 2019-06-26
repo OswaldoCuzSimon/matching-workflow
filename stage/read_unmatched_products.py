@@ -10,7 +10,7 @@
 # Project Name: matching-framework
 
 import utils
-from extract.read_file import XLSX
+from extract import XLSX
 
 
 class ReadUnmatchedProducts(object):

@@ -9,3 +9,5 @@
 # Date last modified: 6/23/19
 # Project Name: matching-framework
 
+from .dump_database import DumpDatabase
+from .read_unmatched_products import ReadUnmatchedProducts
