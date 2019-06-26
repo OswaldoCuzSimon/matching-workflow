@@ -5,3 +5,8 @@ unmatching_file:
   product_namme_col: 'PRODUCTO'
   kargs:
     skiprows: 6
+
+dump_database:
+  retailer:
+    - amazon_us
+    - walmart_us
