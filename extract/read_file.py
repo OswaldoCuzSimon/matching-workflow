@@ -21,7 +21,8 @@ class XLSX(object):
         self.product_name_col = product_namme_col
 
     def df(self, **kargs):
-        df_ = pd.read_excel(self.name, skiprows=6, converters={self.gtin_col: str})
+        kargs.update({'converters': {self.gtin_col: str}})
+        df_ = pd.read_excel(self.name, **kargs)
         df_["gtin"] = df_[self.gtin_col]
         if self.id_col == 'index':
             df_["id_query"] = df_.index
