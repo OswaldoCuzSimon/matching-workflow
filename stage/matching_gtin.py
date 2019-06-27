@@ -21,12 +21,15 @@ class MatchingGtin(object):
         df2 = original_df2.copy()
         df1 = df1[~df1.gtin.isnull()]
         df2 = df2[~df2.gtin.isnull()]
+        df1 = df1[~(df1.gtin != '')]
+        df2 = df2[~(df2.gtin != '')]
         result = pd.merge(df1, df2, on='gtin', how='inner')
+        result = result.drop_duplicates('gtin')
         return result
 
     @classmethod
     def execute(cls, unmatched_products_df, product_df):
         config_file = utils.read_yaml('config.yaml')
-        gtin_match_products_df = cls.match_by_gtin(unmatched_products_df, product_df[['item_uuid', 'gtin', 'product_name', 'product_uuid']])
+        gtin_match_products_df = cls.match_by_gtin(unmatched_products_df, product_df[['item_uuid', 'gtin', 'name', 'product_uuid']])
 
         return gtin_match_products_df

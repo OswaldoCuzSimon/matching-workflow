@@ -21,6 +21,5 @@ class DumpDatabase(object):
         retailer = config_file['dump_database']['retailer']
         product = Product(retailer)
         df = product.df
-        df['product_name'] = df['name']
         df['text'] = df['name'].fillna('')
         return df
