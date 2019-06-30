@@ -16,7 +16,7 @@ import logging
 import stage
 
 
-logger = logging.getLogger('luigi-interface')
+logger = logging.getLogger()
 
 
 class CleanUnmatchedProductsFile(luigi.Task):
@@ -28,9 +28,11 @@ class CleanUnmatchedProductsFile(luigi.Task):
         return luigi.LocalTarget('unmatched_products_clean_file.csv')
 
     def run(self):
+        logger.info("Starting clean_unmatched_products_file Stage")
         stage_ = stage.ReadUnmatchedProducts()
         df = stage_.execute()
         df.to_csv(self.output().path, index=False, quoting=csv.QUOTE_ALL)
+        logger.info("Finishing clean_unmatched_products_file Stage")
 
 
 class DumpDatabase(luigi.Task):
@@ -42,9 +44,11 @@ class DumpDatabase(luigi.Task):
         return luigi.LocalTarget('product.csv')
 
     def run(self):
+        logger.info("Starting dump_database Stage")
         stage_ = stage.DumpDatabase()
         df = stage_.execute()
         df.to_csv(self.output().path, index=False, quoting=csv.QUOTE_ALL)
+        logger.info("Finishing dump_database Stage")
 
 
 class MatchingGtin(luigi.Task):
@@ -57,7 +61,7 @@ class MatchingGtin(luigi.Task):
 
     def run(self):
         input = self.input()
-        logger.info("Running --> {}".format(type(input[0])))
+        logger.info("Starting matching_gtin stage")
         unmatched_products_df = pd.read_csv(input[0].open('r'), converters={'gtin': str})
         product_df = pd.read_csv(input[1].open('r'), converters={'gtin': str})
         stage_ = stage.MatchingGtin()
@@ -65,7 +69,28 @@ class MatchingGtin(luigi.Task):
 
         logger.info(df.head())
         df.to_csv(self.output().path, index=False, quoting=csv.QUOTE_ALL)
+        logger.info("Finishing matching_gtin stage")
 
+
+class MatchingText(luigi.Task):
+
+    def requires(self):
+        return [CleanUnmatchedProductsFile(), DumpDatabase()]
+
+    def output(self):
+        return luigi.LocalTarget('text_match_products_df.csv')
+
+    def run(self):
+        input = self.input()
+        logger.info("Starting matching_text stage")
+        unmatched_products_df = pd.read_csv(input[0].open('r'), converters={'gtin': str})
+        product_df = pd.read_csv(input[1].open('r'), converters={'gtin': str})
+        stage_ = stage.MatchingText()
+        df = stage_.execute(unmatched_products_df, product_df)
+
+        logger.info(df.head())
+        df.to_csv(self.output().path, index=False, quoting=csv.QUOTE_ALL)
+        logger.info("Finishing matching_text stage")
 
 if __name__ == '__main__':
     luigi.run()
