@@ -1,8 +1,8 @@
+git+https://github.com/ByPrice/matching@oscar-pipy#egg=matching
 pandas==0.24.2
 pyaml==19.4.1
 xlrd >= 1.0.0
-luigi==2.8.7
 python-dotenv==0.10.1
 psycopg2-binary==2.8.3
 psycopg2==2.8.3
-git+https://github.com/ByPrice/matching@oscar-pipy#egg=matching
+luigi==2.8.7
