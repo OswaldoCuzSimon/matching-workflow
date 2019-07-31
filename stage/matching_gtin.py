@@ -24,7 +24,7 @@ class MatchingGtin(object):
         df1 = df1[(df1.gtin != '')]
         df2 = df2[(df2.gtin != '')]
         result = pd.merge(df1, df2, on='gtin', how='inner')
-        result = result.drop_duplicates('gtin')
+        result = result.drop_duplicates('id_query')
         return result
 
     @classmethod

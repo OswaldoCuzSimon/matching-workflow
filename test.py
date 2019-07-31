@@ -10,19 +10,18 @@
 # Project Name: matching-framework
 
 #%%
-
-
 import utils
 from extract.read_file import XLSX
+import pandas as pd
 
-config_file = utils.read_yaml('config.yaml')
-unmatching_file_kargs = config_file['unmatching_file']['kargs']
+gtin_df = pd.read_csv('gtin_match_products_df.csv', converters={'gtin': str})
+text_df = pd.read_csv('text_match_products_df.csv', converters={'gtin': str})
+product_df = pd.read_csv('product.csv', converters={'gtin': str})
 
-path = config_file['unmatching_file']['path']
-id_col = config_file['unmatching_file']['id_col']
-gtin_col = config_file['unmatching_file']['gtin_col']
-product_namme_col = config_file['unmatching_file']['product_namme_col']
+#%%
+text_df['product_uuid'] = text_df['id_result']
+short_text_df = pd.merge(text_df, product_df, on='product_uuid', how='inner')
+short_text_df = short_text_df[['gtin', 'item_uuid', 'name']]
+short_gtin_df = gtin_df[['gtin', 'item_uuid', 'name']]
 
-xlsx = XLSX(path, id_col, gtin_col, product_namme_col)
-
-df = xlsx.df(**unmatching_file_kargs)
+match_df = pd.concat([short_gtin_df, short_text_df])
