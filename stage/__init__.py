@@ -13,3 +13,4 @@ from .dump_database import DumpDatabase
 from .read_unmatched_products import ReadUnmatchedProducts
 from .matching_gtin import MatchingGtin
 from .matching_text import MatchingText
+from .get_retailer_products import GetRetailerProducts

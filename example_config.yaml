@@ -8,12 +8,15 @@ unmatching_file:
 
 dump_database:
   retailer:
-    - f_ahorro
-    - san_pablo
-    - farmalisto
-    - farmasmart
-    - farmatodo
-    - farmacias_especializadas
-    - farmapronto
+    - soriana
+    - soriana_online
+    - chedraui
+    - fresko
+    - city_market
+    - la_comer
+    - comercial_mexicana
+    - superama
+    - waltmart
+    - heb
 matching_text:
   precision: 0.9

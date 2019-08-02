@@ -38,16 +38,18 @@ class Product(object):
 
     def get_df_by_stores(self, retailer_keys):
         self.connect()
+        # replace method when retailer list has length 1
+        string_list = tuple(self.retailer_keys).__str__().replace(',)', ')')
         query = """
         select product_uuid, item_uuid, name, gtin, source 
         from product 
-        where item_uuid is not NULL and source in {};""".format(tuple(self.retailer_keys).__str__())
+        where item_uuid is not NULL and source in {};""".format(string_list)
         df = sqlio.read_sql_query(query, self.db)
 
         self.db = None
         return df
 
-    def get_df_by_store(self, retailer_key):
+    def get_df_by_retailer(self, retailer_key):
         self.connect()
         query = """
         select product_uuid, product_id, name, gtin, source 

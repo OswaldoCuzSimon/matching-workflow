@@ -29,7 +29,8 @@ class CleanUnmatchedProductsFile(luigi.Task):
 
     def run(self):
         logger.info("Starting clean_unmatched_products_file Stage")
-        stage_ = stage.ReadUnmatchedProducts()
+        #stage_ = stage.ReadUnmatchedProducts()
+        stage_ = stage.GetRetailerProducts()
         df = stage_.execute()
         df.to_csv(self.output().path, index=False, quoting=csv.QUOTE_ALL)
         logger.info("Finishing clean_unmatched_products_file Stage")

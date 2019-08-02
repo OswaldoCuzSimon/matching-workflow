@@ -1,7 +1,7 @@
 .PHONY: install clean run
 
 clean:
-	rm -f gtin_match_products_df.csv product.csv unmatched_products_clean_file.csv
+	rm -f gtin_match_products_df.csv product.csv unmatched_products_clean_file.csv text_match_products_df.csv
 
 install:
 	python -c 'import nltk; nltk.download("punkt")'

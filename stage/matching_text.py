@@ -34,8 +34,8 @@ class MatchingText(object):
 
         unmatched_products_df['text'] = unmatched_products_df.product_name
         unmatched_products_df['id'] = unmatched_products_df.id_query
-        unmatched_products_df = unmatched_products_df[(
-                                                          unmatched_products_df.gtin.isnull()) | (unmatched_products_df.gtin == '')]
+        #unmatched_products_df = unmatched_products_df[(
+        #                                                  unmatched_products_df.gtin.isnull()) | (unmatched_products_df.gtin == '')]
         product_df['id'] = product_df['product_uuid']
 
         logger.info("Preparing list of queries")
