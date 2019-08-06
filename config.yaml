@@ -15,5 +15,6 @@ dump_database:
     - farmatodo
     - farmacias_especializadas
     - farmapronto
+    - paris
 matching_text:
-  precision: 0.9
+  precision: 0.8

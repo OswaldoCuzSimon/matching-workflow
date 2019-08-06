@@ -19,6 +19,10 @@ class MatchingGtin(object):
     def match_by_gtin(cls, original_df1, original_df2):
         df1 = original_df1.copy()
         df2 = original_df2.copy()
+        df1 = df1[df1.gtin.str.isdigit()]
+        df2 = df2[df2.gtin.str.isdigit()]
+        df1.gtin = df1.gtin.astype(int)
+        df2.gtin = df2.gtin.astype(int)
         df1 = df1[~df1.gtin.isnull()]
         df2 = df2[~df2.gtin.isnull()]
         df1 = df1[(df1.gtin != '')]
