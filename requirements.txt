@@ -1,6 +1,6 @@
 six==1.11.0
 python-dateutil==2.7.5
-luigi==2.8.7
+luigi==3.6.0
 git+https://github.com/ByPrice/matching@upgrade#egg=matching
 pandas==0.24.2
 pyaml==19.4.1
